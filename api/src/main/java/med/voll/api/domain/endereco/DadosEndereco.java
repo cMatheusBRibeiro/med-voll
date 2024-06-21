@@ -24,7 +24,7 @@ public record DadosEndereco(
     String cidade,
 
     @NotBlank
-    @JsonAlias({"uf", "estado"})
+    @JsonAlias({"uf", "estado"}) // Esse campo não é obrigatório, ele apenas fornece apelidos que poderá receber pelo JSON de requisição
     String uf,
 
     @JsonAlias({"complemento"})
