@@ -31,7 +31,7 @@ public class AgendaDeConsultas {
             throw new ValidacaoException("O id do médico informado não existe!");
         }
 
-        var paciente = this.pacienteRepository.findById(dadosAgendamentoConsulta.idPaciente()).get();
+        var paciente = this.pacienteRepository.getReferenceById(dadosAgendamentoConsulta.idPaciente());
         var medico = this.escolherMedico(dadosAgendamentoConsulta);
         var consulta = new Consulta(null, medico, paciente, dadosAgendamentoConsulta.data());
         this.consultaRepository.save(consulta);
