@@ -33,8 +33,16 @@ public class AgendaDeConsultas {
 
         var paciente = this.pacienteRepository.getReferenceById(dadosAgendamentoConsulta.idPaciente());
         var medico = this.escolherMedico(dadosAgendamentoConsulta);
-        var consulta = new Consulta(null, medico, paciente, dadosAgendamentoConsulta.data());
+        var consulta = new Consulta(null, medico, paciente, dadosAgendamentoConsulta.data(), null);
         this.consultaRepository.save(consulta);
+    }
+
+    public void cancelar(Long id, DadosCancelamentoConsulta dadosCancelamentoConsulta) {
+        if (!this.consultaRepository.existsById(id)) {
+            throw new ValidacaoException("Id da consulta informado não existe!");
+        }
+        var consulta = this.consultaRepository.getReferenceById(id);
+        consulta.cancelar(dadosCancelamentoConsulta.motivoCancelamento());
     }
 
     private Medico escolherMedico(DadosAgendamentoConsulta dadosAgendamentoConsulta) {
@@ -51,5 +59,4 @@ public class AgendaDeConsultas {
             dadosAgendamentoConsulta.data()
         );
     }
-
 }
