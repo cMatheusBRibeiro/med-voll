@@ -21,14 +21,14 @@ public class AgendaDeConsultas {
 
     public void agendar(DadosAgendamentoConsulta dadosAgendamentoConsulta) {
         if (!this.pacienteRepository.existsById(dadosAgendamentoConsulta.idPaciente())) {
-            throw new ValidacaoException("O id do paciente informado não existe!");
+            throw new ValidacaoException("Id do paciente informado não existe!");
         }
 
         if (
             dadosAgendamentoConsulta.idMedico() != null &&
             !this.medicoRepository.existsById(dadosAgendamentoConsulta.idMedico())
         ) {
-            throw new ValidacaoException("O id do médico informado não existe!");
+            throw new ValidacaoException("Id do médico informado não existe!");
         }
 
         var paciente = this.pacienteRepository.getReferenceById(dadosAgendamentoConsulta.idPaciente());
