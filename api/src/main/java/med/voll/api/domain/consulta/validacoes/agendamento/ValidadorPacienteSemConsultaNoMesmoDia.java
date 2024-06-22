@@ -1,4 +1,4 @@
-package med.voll.api.domain.consulta.validacoes;
+package med.voll.api.domain.consulta.validacoes.agendamento;
 
 import med.voll.api.domain.ValidacaoException;
 import med.voll.api.domain.consulta.ConsultaRepository;
@@ -16,7 +16,7 @@ public class ValidadorPacienteSemConsultaNoMesmoDia implements ValidadorAgendame
     public void validar(DadosAgendamentoConsulta dadosAgendamentoConsulta) {
         var primeiroHorario = dadosAgendamentoConsulta.data().withHour(7);
         var ultimoHorario = dadosAgendamentoConsulta.data().withHour(18);
-        var isPacientePossuiOutraConsultaNoDia = this.consultaRepository.existsByPacienteIdAndDataBetween(
+        var isPacientePossuiOutraConsultaNoDia = this.consultaRepository.existsByPacienteIdAndDataBetweenAndMotivoCancelamentoIsNull(
             dadosAgendamentoConsulta.idPaciente(),
             primeiroHorario,
             ultimoHorario
