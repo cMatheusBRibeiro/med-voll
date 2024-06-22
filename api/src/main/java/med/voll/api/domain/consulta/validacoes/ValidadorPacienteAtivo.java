@@ -3,9 +3,13 @@ package med.voll.api.domain.consulta.validacoes;
 import med.voll.api.domain.ValidacaoException;
 import med.voll.api.domain.consulta.DadosAgendamentoConsulta;
 import med.voll.api.domain.paciente.PacienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ValidadorPacienteAtivo implements ValidadorAgendamentoConsulta {
 
+    @Autowired
     private PacienteRepository pacienteRepository;
 
     @Override
@@ -13,7 +17,7 @@ public class ValidadorPacienteAtivo implements ValidadorAgendamentoConsulta {
         var pacienteAtivo = this.pacienteRepository.findAtivoById(dadosAgendamentoConsulta.idPaciente());
 
         if (!pacienteAtivo) {
-            throw new ValidacaoException("Id do paciente informado não existe!");
+            throw new ValidacaoException("Não pode agendar consulta para um paciente desativado!");
         }
     }
 
