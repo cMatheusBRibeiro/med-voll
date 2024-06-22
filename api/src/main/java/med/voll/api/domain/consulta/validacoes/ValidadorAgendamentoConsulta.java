@@ -4,6 +4,6 @@ import med.voll.api.domain.consulta.DadosAgendamentoConsulta;
 
 public interface ValidadorAgendamentoConsulta {
 
-    public void validar(DadosAgendamentoConsulta dadosAgendamentoConsulta);
+    void validar(DadosAgendamentoConsulta dadosAgendamentoConsulta);
 
 }

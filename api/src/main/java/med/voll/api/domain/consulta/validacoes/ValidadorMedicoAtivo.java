@@ -10,6 +10,10 @@ public class ValidadorMedicoAtivo implements ValidadorAgendamentoConsulta {
 
     @Override
     public void validar(DadosAgendamentoConsulta dadosAgendamentoConsulta) {
+        if (dadosAgendamentoConsulta.idMedico() == null) {
+            return;
+        }
+
         var medicoAtivo = this.medicoRepository.findAtivoById(dadosAgendamentoConsulta.idMedico());
 
         if (!medicoAtivo) {
